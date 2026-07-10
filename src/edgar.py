@@ -68,8 +68,10 @@ def parse_hit(src: dict):
     items = src.get("items") or []
     if isinstance(items, str):
         items = [x.strip() for x in items.split(",") if x.strip()]
+    doc = src.get("_id", "").split(":", 1)[1] if ":" in src.get("_id", "") else None
     return {
         "adsh": adsh,
+        "doc": doc,
         "cik": ciks[0].lstrip("0") if ciks else None,
         "ticker": ticker,
         "company": re.sub(r"\s*\([^)]*\)\s*$", "", re.sub(r"\s*\(CIK[^)]*\)\s*$", "", name)).strip(),
@@ -77,6 +79,22 @@ def parse_hit(src: dict):
         "file_date": src.get("file_date"),
         "accepted": src.get("file_date_accepted") or src.get("accepted") or "",
     }
+
+
+_accept_cache = {}
+
+
+def acceptance_time(cik: str, adsh: str):
+    """8-K 的 acceptanceDateTime（分钟级，ET 系统时间）。红队 P1-1：file_date 只有天粒度，
+    无法区分盘中旧闻与盘后新事件。来自 submissions API，per-cik 缓存。失败返回 None。"""
+    if cik not in _accept_cache:
+        try:
+            j = _get(f"https://data.sec.gov/submissions/CIK{int(cik):010d}.json").json()
+            rec = j.get("filings", {}).get("recent", {})
+            _accept_cache[cik] = dict(zip(rec.get("accessionNumber", []), rec.get("acceptanceDateTime", [])))
+        except Exception:  # noqa: BLE001
+            _accept_cache[cik] = {}
+    return _accept_cache[cik].get(adsh)
 
 
 _TAG_RE = re.compile(r"<[^>]+>")
@@ -92,20 +110,25 @@ def _strip_html(html: str) -> str:
     return text.strip()
 
 
-def fetch_filing_text(cik: str, adsh: str, max_chars=18000) -> dict:
-    """拉主文档 + press release exhibit (EX-99*) 文本。缓存到 data/filings/。"""
+def fetch_filing_text(cik: str, adsh: str, max_chars=18000, docs=None) -> dict:
+    """拉 8-K 正文 + exhibit 文本。docs = efts 文档级索引给出的文件名列表（首选，
+    它就是全文检索的内容本身）；缺省时退回 index.json 启发式（排除 XBRL 渲染文件 R\\d+.htm）。"""
     key = adsh.replace("-", "")
-    cache = FILINGS / f"{key}.json"
+    cache = FILINGS / f"{key}_v2.json"
     if cache.exists():
         return json.loads(cache.read_text())
     idx = _get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{key}/index.json").json()
     files = [f["name"] for f in idx.get("directory", {}).get("item", [])]
-    htmls = [f for f in files if f.lower().endswith((".htm", ".html")) and "index" not in f.lower()]
-    # 主文档：8-K 本体通常含 '8k'/'8-k' 或是第一个 htm；exhibits 含 ex99/ex-99
-    main = sorted(htmls, key=lambda f: (("8k" not in f.lower().replace("-", "")), len(f)))[:1]
-    exhibits = [f for f in htmls if re.search(r"ex[-_]?99", f.lower())][:2]
+    if docs:
+        chosen = [d for d in docs if d in files][:4]
+    else:
+        htmls = [f for f in files if f.lower().endswith((".htm", ".html"))
+                 and "index" not in f.lower() and not re.match(r"(?i)^r\d+\.htm$", f)]
+        main = sorted(htmls, key=lambda f: (("8k" not in f.lower().replace("-", "")), len(f)))[:1]
+        exhibits = [f for f in htmls if re.search(r"ex[-_]?99", f.lower())][:2]
+        chosen = list(dict.fromkeys(main + exhibits))
     parts = []
-    for fn in dict.fromkeys(main + exhibits):
+    for fn in chosen:
         try:
             raw = _get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{key}/{fn}").text
             parts.append(f"===== {fn} =====\n{_strip_html(raw)}")
