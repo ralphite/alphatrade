@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+data/prices/
+data/filings/
+*.pyc
+.DS_Store
