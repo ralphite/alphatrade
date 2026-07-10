@@ -1,49 +1,35 @@
 # STATE — loop agent 每轮唤醒先读这里
 
-更新时间：2026-07-10 13:40 ET（盘中）
-当前阶段：H1 关卡 2（forward paper）Day 0 warmup 运行中；红队修复已完成并 commit
+更新时间：2026-07-10 15:20 ET（收盘后）
+当前阶段：**H1 v1 已 KILL（关卡 1 两窗口否决）→ H1c（盘后即时入场）历史模拟优先**
 
 ## 关键事实
 
-- **Day-0（今天）全部信号 = warmup，不计正式样本**（凌晨批次受文本 bug + 时间戳缺失影响；且流程延误至开盘后 4h，盘前信号已过期）。
-- 12 个 warmup 影子仓已开（13:35 ET）：5 conv2-long（BNED/AP/FBRX/NRIX/MARA）+ WDFC(3-vetoed-long) + 6 would-short(BYRN/PCSC/RIVN/CABO/FRMI/IONS)。退出 T+2 close（→ 7-14 周二收盘）或 ±4% stop。执行仓 0 个。
-- **WDFC 案例（重要认知）**：8-K 盘后 16:09 发布 → 次日开盘 +22% gap → 盘中 fade -9%。明显的大 beat 没有"开盘买 drift"的肉；LLM 评估者在无实时涨跌数据时对 priced-in 的判断不可靠（已修复：queue 现带 chg_since_event_pct）。H1 的真机会假说调整方向：更模糊/更小/被忽视的事件。
-- 红队 8 条 P0/P1 全部修复（excess 指标、章程滑点、shadow 账本、fresh-price 守卫、盘中 low 止损、事件前 ADV、accepted 分钟级时间戳、无正文跳过）。推进门收紧：n≥150 且 excess t≥2。
+- **H1 v1 死因（机制）**：alpha 在「事件发布→次日开盘 gap」内释放完，开盘入场吃 fade。方向判断没错，入场时点结构错。详见 HYPOTHESES.md 判定条目。
+- 历史证据库：research/screen_2026-06-09_2026-06-11（194 条+outcomes）、research/screen_2026-06-23_2026-06-25（208 条+outcomes）。评估无 lookahead（模型 cutoff 2026-01）。
+- **下一步优先级**：
+  1. H1c 历史模拟：yfinance prepost 分钟数据，对两窗口 conv3/conv2 重算「盘后公告后 30-60min 入场」收益 vs 次日开盘入场。盘后滑点按 100-300bps 悲观计。若差分显著为正 → H1c 立项 forward。
+  2. H1b（gap-fade 做空）：short 方向重算 + borrow 成本，需第三窗口。
+  3. 第三历史窗口（如 06-16..18）增证据。
+  4. 修 fetch_filing_text exhibit 优先级（DRI 案例：EX-99 业绩稿被 18k 截断截掉；EX-99 应排最前）。
+- 13 个 Day-0 warmup 影子仓持有中（T+2 = 7-14 周二收盘退出；FBRX 已止损 -480bps excess）。周一/周二盘中需跑 manage_positions。
+- Gemini 3（gemini-pro-latest，key 在 ../agentrunner/.env）方向一致率 100%（9/9 非 skip）→ 方向判断非单模型噪声；conviction 校准分歧大。
+- forward 管线（scan→评估→red-team→execute→manage→report）已修复红队 3×P0+6×P1，随时可为新假设复用。
 
-## 运行手册（每轮唤醒照此执行）
+## 运行手册
 
-1. `cat STATE.md`；`.venv/bin/python src/ledger.py`（账本，一切看 excess）
-2. **盘中轮（09:30–16:00 ET，每 45–60min）**：`src/scan_8k.py`（增量）→ 若有新队列：评估（subagent 批量，prompts/eval_8k_v1.md）→ conv3 过 red-team argue → `src/execute_signals.py signals/<ET日期>/signals.jsonl` → `src/manage_positions.py`
-3. **收盘轮（16:05 ET）**：manage（time-exit）→ `src/report.py` → journal → STATE.md → git commit
-4. **盘前轮（08:00–09:25 ET）**：scan 隔夜 8-K → 评估 → red-team → 开盘后 09:35 执行（信号必须 accepted 于上一收盘后，否则降 warmup/skip）
-5. **盘后/周末**：研究改进（不碰 eval_8k_v1 与执行规则），周末任务清单见下
-
-## 正式样本资格（缺一即 warmup 标记）
-
-- accepted 时间戳存在且晚于上一交易日 16:00 ET
-- 评估时 queue 带 chg_since_event_pct（priced-in 判断有数据依据）
-- 信号产生后 30 分钟内以 fresh_price 成交
+1. 交易日盘中/收盘：`src/scan_8k.py`（增量）→ 有队列则评估（agent 批量，prompts/eval_8k_v1.md）→ execute → `src/manage_positions.py`；16:05 ET 收盘轮 report+commit+push
+2. 研究任务（盘后/周末）：按上面优先级推进；历史评估用 research/PROMPT_HIST_EVAL.md 模板（换目录）+ agent 波次（每批 8-9 条，12 个并发）
+3. 每轮必做：`date` 核对真实时间；结束前更新本文件 + ScheduleWakeup
+4. commit 后 push origin main
 
 ## 纪律红线
 
-- eval_8k_v1 运行期内不可改；改 = 计数清零存 v2
-- conv3 必须过 red-team（独立反驳 agent 或硬数据仲裁），veto 记 3-vetoed 影子
-- 所有非 skip 信号（含 would-short）都开影子仓——conviction 单调性与 short 侧是核心自查
-- paper only；指标以 excess（对 SPY）为准
-- 每轮结束：更新本文件时间戳 + ScheduleWakeup（校准与 date 命令核对真实时间！今晨教训：假设的时间与真实时间差 4h）
+- H1 v1 已死，不得复活（除非全新形态重新登记）；eval_8k_v1 冻结（历史对照基准）
+- 新假设先关卡 1（历史模拟，池内差分 + 悲观成本）再谈 forward
+- paper only；一切指标池内差分优先，SPY 差分其次，绝对收益仅记录
 
 ## 市场时间
 
-- 今天 2026-07-10 周五。收盘 16:00 ET。下一交易日 7-13 周一。
-- warmup 影子仓 time-exit 到期：7-14 周二收盘。
-
-## 环境备忘（2026-07-10 用户指示）
-
-- remote = https://github.com/ralphite/alphatrade，工作流始终用 origin/main：**每次收盘轮 commit 后 push origin main**
-- ../agentrunner/.env 可复用：含 GEMINI_API_KEY（Google Gemini）。用途候选：red-team 关的跨模型第二意见、评估者一致性实验（周末研究项）。不改 eval_8k_v1 主流程。
-
-## 本轮待办
-
-- [ ] 盘中增量 scan 结果 → 评估 → 可能的首批正式信号（若 accepted 今天 09:30 后）
-- [ ] 15:50 ET 前最后一轮盘中检查；16:05 ET 收盘轮（report/journal/commit）
-- [ ] 周末：H2 候选调研（earnings calendar 源、transcript 源）、无正文 filing 统计、conviction 校准分析
+- 今天 2026-07-10 周五，已收盘。下一交易日 7-13 周一（盘前 08:00 ET 起有意义）。
+- 周末 = 纯研究窗口。
