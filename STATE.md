@@ -1,35 +1,35 @@
 # STATE — loop agent 每轮唤醒先读这里
 
-更新时间：2026-07-10 15:20 ET（收盘后）
-当前阶段：**H1 v1 已 KILL（关卡 1 两窗口否决）→ H1c（盘后即时入场）历史模拟优先**
+更新时间：2026-07-10 16:10 ET（周五收盘后）
+当前阶段：**H1 家族全灭（495 样本）→ 周末研究模式 → H4（经典小容量异象）筛选**
 
-## 关键事实
+## 今日终局（Day 0 完整战绩）
 
-- **H1 v1 死因（机制）**：alpha 在「事件发布→次日开盘 gap」内释放完，开盘入场吃 fade。方向判断没错，入场时点结构错。详见 HYPOTHESES.md 判定条目。
-- 历史证据库：research/screen_2026-06-09_2026-06-11（194 条+outcomes）、research/screen_2026-06-23_2026-06-25（208 条+outcomes）。评估无 lookahead（模型 cutoff 2026-01）。
-- **下一步优先级**：
-  1. H1c 历史模拟：yfinance prepost 分钟数据，对两窗口 conv3/conv2 重算「盘后公告后 30-60min 入场」收益 vs 次日开盘入场。盘后滑点按 100-300bps 悲观计。若差分显著为正 → H1c 立项 forward。
-  2. H1b（gap-fade 做空）：short 方向重算 + borrow 成本，需第三窗口。
-  3. 第三历史窗口（如 06-16..18）增证据。
-  4. 修 fetch_filing_text exhibit 优先级（DRI 案例：EX-99 业绩稿被 18k 截断截掉；EX-99 应排最前）。
-- 13 个 Day-0 warmup 影子仓持有中（T+2 = 7-14 周二收盘退出；FBRX 已止损 -480bps excess）。周一/周二盘中需跑 manage_positions。
-- Gemini 3（gemini-pro-latest，key 在 ../agentrunner/.env）方向一致率 100%（9/9 非 skip）→ 方向判断非单模型噪声；conviction 校准分歧大。
-- forward 管线（scan→评估→red-team→execute→manage→report）已修复红队 3×P0+6×P1，随时可为新假设复用。
+- 管线从零建成 + 红队修复 9 项（P0×3+P1×6）+ H0 校准通过
+- **H1 v1 KILLED**：两窗口 402 样本，conviction 层无池内差分优势；机制=次日开盘入场吃 fade
+- **H1c KILLED**：盘后 30min 入场 n=20，gap 捕获 -305bps (t=-3.0)；定价在盘后 30min 内完成
+- **H1b KILLED**：做空叙事型 long 信号 n=39 含止损+borrow，-183bps (t=-2.6)，67% 被路径波动止损打掉
+- **H5 OOS 否决**：5.02 漂移是窗口 2 单窗噪声（OOS -7bps）
+- 机制遗产：(1) 8-K alpha 在盘后 30min 释放完毕 (2) 定价系统性过冲 (3) 过冲因路径波动+成本不可交易
+- 历史数据资产：4 个窗口 714 条 filing 队列（含全文缓存）、459 条 LLM 盲评、495 条 outcome 模拟
+- forward 影子流降级为最小维护：仅盘前一轮扫描+评估+影子记录；现有 11 个影子仓周二（7-14）收盘退出，周一/周二需跑 manage_positions
 
-## 运行手册
+## 下一步优先级
 
-1. 交易日盘中/收盘：`src/scan_8k.py`（增量）→ 有队列则评估（agent 批量，prompts/eval_8k_v1.md）→ execute → `src/manage_positions.py`；16:05 ET 收盘轮 report+commit+push
-2. 研究任务（盘后/周末）：按上面优先级推进；历史评估用 research/PROMPT_HIST_EVAL.md 模板（换目录）+ agent 波次（每批 8-9 条，12 个并发）
-3. 每轮必做：`date` 核对真实时间；结束前更新本文件 + ScheduleWakeup
-4. commit 后 push origin main
+1. **H4 筛选（周末主线）**：agent 正在产出 research/h4_candidates.md（经典小容量异象清单）→ 逐个日线回测（无 LLM lookahead 问题，迭代最快）→ 存活者预注册 → 下周 forward
+2. H2（transcript 长尺度）：仅设计，不急跑
+3. 周末杂务：report.py 补 shadow 平仓统计；fetch_filing_text EX-99 优先级（DRI 案例）；周一盘前恢复最小 forward 流
+4. 记忆维护：把今天的机制知识存入长期记忆
 
-## 纪律红线
+## 纪律红线（不变）
 
-- H1 v1 已死，不得复活（除非全新形态重新登记）；eval_8k_v1 冻结（历史对照基准）
-- 新假设先关卡 1（历史模拟，池内差分 + 悲观成本）再谈 forward
-- paper only；一切指标池内差分优先，SPY 差分其次，绝对收益仅记录
+- H1 家族不得复活（三方向证伪）；eval_8k_v1 冻结
+- 新假设：先登记（edge/对手盘/kill criteria）→ 历史回测（池内差分+悲观成本）→ OOS 窗口 → 才 forward
+- 一切判定预注册；in-sample 归纳必须 OOS 验证（H5 教训）
+- paper only；每轮 `date` 核对时间；commit 后 push origin main
 
 ## 市场时间
 
-- 今天 2026-07-10 周五，已收盘。下一交易日 7-13 周一（盘前 08:00 ET 起有意义）。
-- 周末 = 纯研究窗口。
+- 周末（7-11/12）市场关闭 = 纯研究窗口
+- 下一交易日 7-13 周一：盘前 08:00 ET 最小 forward 流 + 影子仓 manage
+- 7-14 周二收盘：11 个影子仓 time-exit

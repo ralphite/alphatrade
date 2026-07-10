@@ -276,36 +276,6 @@
    "warmup": true
   }
  },
- "FRMI:0001213900-26-076788": {
-  "pos_id": "3fba04c5",
-  "ticker": "FRMI",
-  "direction": "short",
-  "shadow": true,
-  "shares": 317,
-  "entry_px": 6.3006,
-  "entry_ref_px": 6.34499979019165,
-  "entry_slip_bps": 70.0,
-  "entry_fee": 1.58,
-  "entry_ts": "2026-07-10T17:33:45+00:00",
-  "et_open_date": "2026-07-10",
-  "entry_quote_ts": "2026-07-10 13:33:00-04:00",
-  "spy_entry": 754.010009765625,
-  "stop_px": 6.5526,
-  "exit_after_close_n": 2,
-  "signal": {
-   "ticker": "FRMI",
-   "direction": "skip",
-   "conviction": 1,
-   "thesis": "发行 3.5 亿美元 2031 到期可转债（含 capped call），叠加递延 REIT 选择、前 CEO 诉讼、潜在大幅稀释等负面披露，1-2 日大概率承压。",
-   "staleness_check": "07-09 新宣布的发行，非旧闻。",
-   "priced_in_check": "可转债发行通常引发稀释担忧与可转债套利做空对冲，短期偏空而非偏多。",
-   "note": "would-short: 可转债发行稀释 + capped call 对冲做空压力 + 多项负面披露（诉讼/递延 REIT/无 CEO）。v1 仅 long 故 skip。",
-   "signal_id": "0001213900-26-076788",
-   "eval_prompt": "eval_8k_v1",
-   "adv_dollars": 106024200.08637428,
-   "warmup": true
-  }
- },
  "IONS:0001140361-26-028092": {
   "pos_id": "bf1a2c91",
   "ticker": "IONS",
