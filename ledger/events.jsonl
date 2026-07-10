@@ -83,3 +83,27 @@
 {"ts": "2026-07-10T17:41:12+00:00", "et_date": "2026-07-10", "kind": "signal", "signal_id": "0001628280-26-047852", "ticker": "FSBC", "direction": "skip", "conviction": 1, "thesis": "仅公告Q2业绩发布日程(7/22盘后、7/23 webcast), 零信息含量。", "staleness_check": "accepted 7-10 08:09 ET盘前今日披露, 但纯日程公告。", "priced_in_check": "无实质内容, chg +0.03%无反应, 无定价空间。", "note": "银行季报日程公告, 程序性skip。", "eval_prompt": "eval_8k_v1", "adv_dollars": 7865795.961322784, "market_cap": 1033002610.0337105, "accepted": "2026-07-10T12:09:26.000Z"}
 {"ts": "2026-07-10T17:41:50+00:00", "et_date": "2026-07-10", "kind": "void_shadow", "key": "RRC:0000315852-26-000015", "reason": "negation-parse bug: note said NOT would-short; opened in error, voided 3min later, no trade recorded"}
 {"ts": "2026-07-10T17:41:50+00:00", "et_date": "2026-07-10", "kind": "void_shadow", "key": "IONS:0001140361-26-028154", "reason": "negation-parse bug: note said NOT would-short; opened in error, voided 3min later, no trade recorded"}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "BNED", "last": 12.869999885559082, "upnl_pct": 0.22, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "BYRN", "last": 3.9700000286102295, "upnl_pct": 1.53, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "AP", "last": 7.869999885559082, "upnl_pct": -0.06, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "FBRX", "last": 44.13999938964844, "upnl_pct": -0.92, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "NRIX", "last": 23.020000457763672, "upnl_pct": -0.12, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "RIVN", "last": 17.975000381469727, "upnl_pct": -0.42, "held_td": 0}
+{"ts": "2026-07-10T18:10:25+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "MARA", "last": 12.729999542236328, "upnl_pct": -0.44, "held_td": 0}
+{"ts": "2026-07-10T18:10:26+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "WDFC", "last": 268.05499267578125, "upnl_pct": 0.55, "held_td": 0}
+{"ts": "2026-07-10T18:10:26+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "CABO", "last": 36.959999084472656, "upnl_pct": -1.49, "held_td": 0}
+{"ts": "2026-07-10T18:10:26+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "FRMI", "last": 6.360000133514404, "upnl_pct": -0.94, "held_td": 0}
+{"ts": "2026-07-10T18:10:26+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "IONS", "last": 58.880001068115234, "upnl_pct": -0.52, "held_td": 0}
+{"ts": "2026-07-10T18:10:26+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "EQPT", "last": 18.530000686645508, "upnl_pct": 1.33, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "BNED", "last": 12.704999923706055, "upnl_pct": -1.06, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "BYRN", "last": 3.9700000286102295, "upnl_pct": 1.53, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "AP", "last": 7.855000019073486, "upnl_pct": -0.25, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "FBRX", "last": 43.96500015258789, "upnl_pct": -1.31, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "NRIX", "last": 23.0, "upnl_pct": -0.21, "held_td": 0}
+{"ts": "2026-07-10T18:18:33+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "RIVN", "last": 17.950000762939453, "upnl_pct": -0.28, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "MARA", "last": 12.690099716186523, "upnl_pct": -0.75, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "WDFC", "last": 268.4200134277344, "upnl_pct": 0.69, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "CABO", "last": 36.81209945678711, "upnl_pct": -1.08, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "FRMI", "last": 6.355000019073486, "upnl_pct": -0.86, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "IONS", "last": 59.09000015258789, "upnl_pct": -0.88, "held_td": 0}
+{"ts": "2026-07-10T18:18:34+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "EQPT", "last": 18.709999084472656, "upnl_pct": 2.31, "held_td": 0}

@@ -37,6 +37,11 @@
 - 今天 2026-07-10 周五。收盘 16:00 ET。下一交易日 7-13 周一。
 - warmup 影子仓 time-exit 到期：7-14 周二收盘。
 
+## 环境备忘（2026-07-10 用户指示）
+
+- remote = https://github.com/ralphite/alphatrade，工作流始终用 origin/main：**每次收盘轮 commit 后 push origin main**
+- ../agentrunner/.env 可复用：含 GEMINI_API_KEY（Google Gemini）。用途候选：red-team 关的跨模型第二意见、评估者一致性实验（周末研究项）。不改 eval_8k_v1 主流程。
+
 ## 本轮待办
 
 - [ ] 盘中增量 scan 结果 → 评估 → 可能的首批正式信号（若 accepted 今天 09:30 后）
