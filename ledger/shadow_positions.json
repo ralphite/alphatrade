@@ -365,5 +365,37 @@
    "adv_dollars": 273512539.31396484,
    "warmup": true
   }
+ },
+ "EQPT:0001693736-26-000013": {
+  "pos_id": "63e21300",
+  "ticker": "EQPT",
+  "direction": "long",
+  "shadow": true,
+  "shares": 109,
+  "entry_px": 18.2874,
+  "entry_ref_px": 18.260000228881836,
+  "entry_slip_bps": 15.0,
+  "entry_fee": 1.0,
+  "entry_ts": "2026-07-10T17:41:12+00:00",
+  "et_open_date": "2026-07-10",
+  "entry_quote_ts": "2026-07-10 13:40:00-04:00",
+  "spy_entry": 754.260009765625,
+  "stop_px": 17.5559,
+  "exit_after_close_n": 2,
+  "signal": {
+   "signal_id": "0001693736-26-000013",
+   "ticker": "EQPT",
+   "direction": "long",
+   "conviction": 2,
+   "thesis": "上调2026全年指引(租赁分部收入增长中值29%->33%, 总收入与Adj Core EBITDA同步上调)并授权$500M(约11%市值)回购, 基本面实质利好。",
+   "staleness_check": "指引上调与回购授权为本8-K首次披露的新信息, 非旧闻; 但accepted 7-09 15:41 ET已近昨收, 市场已开始反应。",
+   "priced_in_check": "疑点: 股价已自事件前收盘涨+13.75%(远超>5%阈值), 大部分利好或已定价, 从此价位追多的2日续涨edge不足, 故影子记录不执行。",
+   "note": "强beat但已大幅反应; 若回落至+5%以内可重估为conviction 3。",
+   "eval_prompt": "eval_8k_v1",
+   "adv_dollars": 54781586.20512962,
+   "market_cap": 4593226957.9469185,
+   "accepted": "2026-07-09T19:41:05.000Z",
+   "warmup": true
+  }
  }
 }

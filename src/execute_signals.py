@@ -9,6 +9,7 @@
 
 用法：.venv/bin/python src/execute_signals.py signals/2026-07-10/signals.jsonl"""
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -43,7 +44,10 @@ def main(path):
         direction = s.get("direction")
         conv = s.get("conviction")
         vetoed = s.get("vetoed", False)
-        would_short = "would-short" in (s.get("note") or "")
+        note = s.get("note") or ""
+        # would-short 检测需排除否定句（"不作would-short"/"not would-short"）
+        would_short = bool(re.search(r"(?<![不非未])(?:^|[\s,;:。，'\"(（])would-short", note)) \
+            and not re.search(r"(?:不作|不标|不做|并非|不是|not?\s+|no\s+)would-short", note)
         execute = direction == "long" and conv == 3 and not vetoed
         shadow_long = direction == "long" and not execute
         shadow_short = would_short
