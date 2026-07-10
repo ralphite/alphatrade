@@ -55,8 +55,9 @@ def simulate(tkr, accepted, spy, hold_td):
         return None
     R = float(df.loc[D, "Close"]) / prev_close - 1
     entry_day = cal[dpos + 1]
-    mcap_proxy = adv * 100  # 无市值数据时的粗代理：仅用于滑点分档（ADV$2-50M → 小盘档）
-    slip = slippage_bps(float(df.loc[entry_day, "Open"]), None if adv > 5e7 else 4e8)
+    # 滑点分档用 ADV 代理市值：ADV>$50M 按大盘档(15bps)，$10-50M 中档(35)，其余小盘档(60)
+    mcap_proxy = 3e9 if adv > 5e7 else (1e9 if adv > 1e7 else 4e8)
+    slip = slippage_bps(float(df.loc[entry_day, "Open"]), mcap_proxy)
     entry_px = float(df.loc[entry_day, "Open"]) * (1 + slip / 1e4)
     stop_px = entry_px * (1 - STOP_DN)
     epos = dpos + 1
