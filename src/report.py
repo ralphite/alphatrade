@@ -6,7 +6,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).parent))
-from ledger import EVENTS, TRADES, _read_jsonl, load_positions, summary  # noqa: E402
+from ledger import EVENTS, SHADOW_TRADES, TRADES, _read_jsonl, load_positions, summary  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -18,6 +18,7 @@ def main():
     sig_today = [e for e in events if e["kind"] == "signal" and e["ts"][:10] == today]
     exec_today = [e for e in events if e["kind"] == "fill_open" and e["ts"][:10] == today]
     closed_today = [t for t in _read_jsonl(TRADES) if t["exit_ts"][:10] == today]
+    closed_today += [t for t in _read_jsonl(SHADOW_TRADES) if t.get("et_close_date") == today]
     pos = load_positions()
     s = summary()
     conv = {}
