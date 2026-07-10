@@ -120,7 +120,10 @@ def fetch_filing_text(cik: str, adsh: str, max_chars=18000, docs=None) -> dict:
     idx = _get(f"https://www.sec.gov/Archives/edgar/data/{cik}/{key}/index.json").json()
     files = [f["name"] for f in idx.get("directory", {}).get("item", [])]
     if docs:
-        chosen = [d for d in docs if d in files][:4]
+        # EX-99（press release/业绩稿）优先排前，防止 18k 截断把关键 exhibit 截掉（DRI 案例）
+        in_files = [d for d in docs if d in files]
+        ex99 = [d for d in in_files if re.search(r"ex[-_]?99", d.lower())]
+        chosen = (ex99 + [d for d in in_files if d not in ex99])[:4]
     else:
         htmls = [f for f in files if f.lower().endswith((".htm", ".html"))
                  and "index" not in f.lower() and not re.match(r"(?i)^r\d+\.htm$", f)]
