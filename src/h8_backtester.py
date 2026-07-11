@@ -108,17 +108,89 @@ def run_synthetic(start, end):
     print(f"[saved {out}]")
 
 
-def run_polygon(start, end):
-    key = None
+def _polygon_key():
     envp = ROOT.parent / "agentrunner" / ".env"
     if envp.exists():
         for line in envp.read_text().splitlines():
             if line.startswith("POLYGON_API_KEY"):
-                key = line.split("=", 1)[1].strip()
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return None
+
+
+def _pg(url, key, params=None):
+    import time as _t
+    import urllib.parse
+    import urllib.request
+    params = dict(params or {})
+    params["apiKey"] = key
+    full = f"https://api.polygon.io{url}?{urllib.parse.urlencode(params)}"
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(full, timeout=30) as r:
+                return json.loads(r.read())
+        except Exception as e:  # noqa: BLE001
+            if "429" in str(e):
+                _t.sleep(13)  # starter 档 5 req/min
+                continue
+            if attempt == 4:
+                raise
+            _t.sleep(2 * (attempt + 1))
+    return None
+
+
+def run_polygon(start, end, underlying="SPY"):
+    """真实期权链回测：每交易日 10:00 ET 快照 → 15Δ/5Δ iron condor → 收盘结算。
+    数据：Polygon options aggregates（分钟 bar 的 10:00 快照价近似 bid/ask：
+    starter 档无 NBBO 历史，用 bar 的 low 作卖出价、high 作买入价 —— 比 mid 更悲观）。"""
+    key = _polygon_key()
     if not key:
         print("POLYGON_API_KEY 未配置（../agentrunner/.env）。等待用户批准 H8 数据订阅后运行。")
         return
-    print("TODO: polygon 期权链历史实现（等 key 到位后完成此函数）")
+    spy = daily_history(underlying, period="10y")
+    spy = spy[(spy.index >= start) & (spy.index <= end)].copy()
+    rv = spy["Close"].pct_change().rolling(10).std() * (252 ** 0.5)
+    rows = []
+    for i in range(11, len(spy)):
+        day = spy.index[i].strftime("%Y-%m-%d")
+        S_open, S_close = float(spy["Open"].iloc[i]), float(spy["Close"].iloc[i])
+        sigma = max(float(rv.iloc[i - 1]) * 1.1, 0.08)
+        T = 6.5 / 24 / 365
+        legs = {}
+        ok = True
+        for name, delta, is_call in [("sc", 0.15, True), ("sp", 0.15, False), ("lc", 0.05, True), ("lp", 0.05, False)]:
+            K = round(strike_at_delta(S_open, T, sigma, delta, is_call))
+            cp = "C" if is_call else "P"
+            exp = day.replace("-", "")[2:]
+            occ = f"O:{underlying}{exp}{cp}{int(K*1000):08d}"
+            j = _pg(f"/v2/aggs/ticker/{occ}/range/1/minute/{day}/{day}", key, {"limit": 500})
+            bars = (j or {}).get("results") or []
+            # 10:00 ET = 14:00 UTC（夏令时）附近的 bar；t 为毫秒 epoch
+            target = [b for b in bars if 13.9 <= (b["t"] / 1000 % 86400) / 3600 <= 14.25]
+            bar = target[0] if target else (bars[len(bars) // 6] if bars else None)
+            if not bar:
+                ok = False
+                break
+            legs[name] = {"K": K, "sell_px": bar["l"], "buy_px": bar["h"]}
+        if not ok:
+            continue
+        credit = legs["sc"]["sell_px"] + legs["sp"]["sell_px"] - legs["lc"]["buy_px"] - legs["lp"]["buy_px"]
+        payoff = -(max(S_close - legs["sc"]["K"], 0) - max(S_close - legs["lc"]["K"], 0)
+                   + max(legs["sp"]["K"] - S_close, 0) - max(legs["lp"]["K"] - S_close, 0))
+        pnl = (credit + payoff) * 100 - 4 * COMMISSION_PER_LEG
+        rows.append({"day": day, "pnl": round(pnl, 2), "credit": round(credit * 100, 0)})
+        if len(rows) % 25 == 0:
+            print(f"  {len(rows)} days done ({day})", flush=True)
+    df = pd.DataFrame(rows).set_index("day")
+    out = ROOT / "research" / f"h8_polygon_{underlying}_{start}_{end}.csv"
+    df.to_csv(out)
+    p = df["pnl"]
+    print(f"=== H8 POLYGON 真实数据（{underlying} {start}..{end}，bar low/high 成交=悲观于 NBBO）===")
+    print(f"n={len(p)} 日均 ${p.mean():.2f} win={(p>0).mean():.0%} 最差日 ${p.min():.0f} P5 ${p.quantile(0.05):.0f} 年化 ${p.mean()*252:.0f}")
+    audit = df[df.index.isin(AUDIT_DAYS)]
+    if not audit.empty:
+        print("极端日审计:")
+        print(audit.to_string())
+    print(f"[saved {out}]")
 
 
 if __name__ == "__main__":
