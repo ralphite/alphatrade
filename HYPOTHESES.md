@@ -124,3 +124,8 @@ gap-based PEAD（R>+5% 做多 20td）：pilot 3-5月 V 形差分（大beat +153b
 ## H2 数据源结论（2026-07-11 更新）
 
 $0 预检路径确定：defeatbeta-api（免费历史 transcript）+ finnhub 免费 earnings-surprise（historical SUE）→ 先跑关卡 1 回测（语气/guidance 变化 vs 数周漂移，池内差分口径）；存活再上 forward 采集（EarningsCall Premium + FMP Starter ≈ $91/月）。覆盖偏大盘为主要局限。排队于 H8/H6 之后。
+
+## H2 判定：预检不通过，归档（2026-07-11 凌晨，n=100 无 lookahead）
+
+guidance/tone → T+2 入场 20td 漂移：long 信号池内差分 -87bps (t=-0.24)；raise 全体 -173bps；反检组无信号；各层 t<1。v1 prompt 的 raise 定义漏洞（首发指引歧义）已记录，但即便宽松口径也无信号。不投 forward 数据订阅。
+**范式级结论**：「LLM 读公开文本→短中期交易信号」在十个形态上全灭（8-K×3、transcript、日内×4、轮动、隔夜）。文本里没有零售可及的 alpha——市场对公开文本的定价快于且过度于一切零售入场时点。LLM 在本项目的正确用途=研究引擎（H6 论点/13F/组合构建）与流程自动化，不是信号生成器。
