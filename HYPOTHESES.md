@@ -120,3 +120,7 @@ gap-based PEAD（R>+5% 做多 20td）：pilot 3-5月 V 形差分（大beat +153b
 **风险预注册（尾部诚实定价）**：2018-02-05 XIV 单日 -90%；2020-03 naked put 涨 5-10 倍被强平；2024-08-05 VIX 盘中破 65。**naked 永久禁止（等同 H1 不得复活红线）**；全组合 defined 最大亏损和 ≤ 账户 5%、单 expiry ≤ 2-3%、跳过 FOMC/CPI/事件日。
 **验证范式（专属，非 t 检验）**：① 离线闸 go/no-go——固定规则 0DTE IC 在 2018-2026 全样本+三极端日、扣悲观 NBBO 成交+费用+1256 后，净 VRP>0 且三极端日单日 defined 亏损 ≤ 预算；② forward ≥3 个月且穿越 ≥1 次 VIX>30；判据=净捕获 VRP>0 且最坏单日 ≤ 预算，**不是均值 t≥2**。
 **第一步（最低成本 go/no-go）**：订 Polygon 期权数据 → 写 0DTE IC 固定规则离线回测器（严格 bid 卖/ask 买、绝不 mid）→ 单独输出三极端日 defined 单日 P&L → 通过才接 IBKR paper。四方向里 go/no-go 单位成本最低者。
+
+## H2 数据源结论（2026-07-11 更新）
+
+$0 预检路径确定：defeatbeta-api（免费历史 transcript）+ finnhub 免费 earnings-surprise（historical SUE）→ 先跑关卡 1 回测（语气/guidance 变化 vs 数周漂移，池内差分口径）；存活再上 forward 采集（EarningsCall Premium + FMP Starter ≈ $91/月）。覆盖偏大盘为主要局限。排队于 H8/H6 之后。
