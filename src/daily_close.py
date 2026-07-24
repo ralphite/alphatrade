@@ -33,7 +33,7 @@ def main():
     if not is_trading_day(now):
         log.append("non-trading day, exit")
     else:
-        for name, script in [("TOM", "tom_sleeve.py"), ("POSITIONS", "manage_positions.py"), ("REPORT", "report.py")]:
+        for name, script in [("TOM", "tom_sleeve.py"), ("IEF", "ief_sleeve.py"), ("POSITIONS", "manage_positions.py"), ("REPORT", "report.py")]:
             try:
                 out = sh(f".venv/bin/python src/{script}")
                 log.append(f"--- {name} ---\n{out.strip()}")

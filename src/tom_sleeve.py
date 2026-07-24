@@ -35,20 +35,29 @@ def trading_days_of_month(y, m):
     return out
 
 
-def target_position(today: str) -> str:
-    """今天收盘后应持有什么（回测口径 TOM(2,2)：收益日=月末最后2交易日+月初头2交易日；
-    故买入=倒数第3交易日收盘，卖出=次月第2交易日收盘）。"""
+ROTATION_SUSPENDED = True  # 2026-07-24: 三段分解显示效应仅存于 2020-23,kill 线触发。影子跟踪中。
+
+
+def tom_window_position(today: str) -> str:
+    """原 TOM(2,2) 轮动口径(现仅用于影子记录)。"""
     y, m = int(today[:4]), int(today[5:7])
     cur = trading_days_of_month(y, m)
     if today not in cur:
-        return "HOLD"  # 非交易日
-    if today >= cur[-3]:
-        return "QLD"   # 倒数第3交易日收盘买入，持有月末最后2天的收益
-    if today < cur[1]:
-        return "QLD"   # 月初第1交易日收盘后仍持有
-    if today == cur[1]:
-        return "QQQ"   # 第2交易日收盘卖出（已吃到当日收益）
+        return "HOLD"
+    if today >= cur[-3] or today < cur[1]:
+        return "QLD"
     return "QQQ"
+
+
+def target_position(today: str) -> str:
+    """今天收盘后应持有什么。轮动暂停期恒持 QQQ(=基准仓);影子逻辑见 tom_window_position。"""
+    y, m = int(today[:4]), int(today[5:7])
+    cur = trading_days_of_month(y, m)
+    if today not in cur:
+        return "HOLD"
+    if ROTATION_SUSPENDED:
+        return "QQQ"
+    return tom_window_position(today)
 
 
 def load_state():
