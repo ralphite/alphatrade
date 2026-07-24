@@ -136,3 +136,4 @@
 {"ts": "2026-07-10T20:05:28+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "IONS", "last": 58.2400016784668, "upnl_pct": 0.57, "held_td": 0}
 {"ts": "2026-07-10T20:05:29+00:00", "et_date": "2026-07-10", "kind": "mark", "shadow": true, "ticker": "EQPT", "last": 18.635000228881836, "upnl_pct": 1.9, "held_td": 0}
 {"ts": "2026-07-24T20:00:24+00:00", "et_date": "2026-07-24", "kind": "tom_sleeve_init", "position": "QQQ", "shares": 43, "entry_px": 683.9768, "cash": 589.0, "inception": "2026-07-24", "inception_value": 30000.0, "qqq_inception_px": 683.8400268554688, "last_action": "2026-07-24"}
+{"ts": "2026-07-24T20:01:06+00:00", "et_date": "2026-07-24", "kind": "tom_sleeve_mark", "value": 30010.46, "bench": 30016.67}

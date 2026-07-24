@@ -185,6 +185,7 @@ def load_positions(shadow=False) -> dict:
 
 
 def _stats(trades):
+    trades = [t for t in trades if "pnl" in t]  # 容错:跳过缺字段的历史记录
     if not trades:
         return {"n": 0}
     wins = [t for t in trades if t["pnl"] > 0]
