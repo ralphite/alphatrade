@@ -2,6 +2,9 @@
 __pycache__/
 data/prices/
 data/filings/
+data/form345/zip/
+data/form345/_tmp/
+data/insider_buys.parquet
 *.pyc
 .DS_Store
 .venv311/
