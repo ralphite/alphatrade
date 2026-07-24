@@ -1,45 +1,28 @@
-# STATE — loop agent 每轮唤醒先读这里
+# STATE — 每轮唤醒先读这里
 
-更新时间：2026-07-10 20:45 ET（周五晚）
-当前阶段：**组合成形期：H4c forward（执行器就位）+ H6 待入场门（7月底 capex 指引）+ 研究线继续**
+更新时间:2026-07-21 15:55 ET(周二)
+当前阶段:**重启周:daily runner(launchd)已装 + 广域策略普查进行中**
 
-## 今日终局（Day 0 完整战绩）
+## 运行架构(2026-07-21 起)
 
-- 管线从零建成 + 红队修复 9 项（P0×3+P1×6）+ H0 校准通过
-- **H1 v1 KILLED**：两窗口 402 样本，conviction 层无池内差分优势；机制=次日开盘入场吃 fade
-- **H1c KILLED**：盘后 30min 入场 n=20，gap 捕获 -305bps (t=-3.0)；定价在盘后 30min 内完成
-- **H1b KILLED**：做空叙事型 long 信号 n=39 含止损+borrow，-183bps (t=-2.6)，67% 被路径波动止损打掉
-- **H5 OOS 否决**：5.02 漂移是窗口 2 单窗噪声（OOS -7bps）
-- 机制遗产：(1) 8-K alpha 在盘后 30min 释放完毕 (2) 定价系统性过冲 (3) 过冲因路径波动+成本不可交易
-- 历史数据资产：4 个窗口 714 条 filing 队列（含全文缓存）、459 条 LLM 盲评、495 条 outcome 模拟
-- forward 影子流降级为最小维护：仅盘前一轮扫描+评估+影子记录；现有 11 个影子仓周二（7-14）收盘退出，周一/周二需跑 manage_positions
+- **执行层(无人值守)**:launchd `com.alphatrade.daily` 每天 13:10 本地(≈16:10 ET)跑 src/daily_close.py:交易日检查→TOM sleeve(初始化/换仓/mark)→影子仓管理→日报→git push。独立于 Claude 会话,机器休眠唤醒后补跑。日志 logs/daily_*.log
+- **研究层(Claude loop,会话内)**:策略普查→回测→判定→新策略并入 daily runner
+- 教训(7-11~7-21 十日中断):in-session loop 不可作为执行层;规则型策略 + launchd 才是正解
 
-## 下一步优先级
+## 组合现状
 
-1. **H4 筛选（周末主线）**：agent 正在产出 research/h4_candidates.md（经典小容量异象清单）→ 逐个日线回测（无 LLM lookahead 问题，迭代最快）→ 存活者预注册 → 下周 forward
-2. H2（transcript 长尺度）：仅设计，不急跑
-3. 周末杂务：report.py 补 shadow 平仓统计；fetch_filing_text EX-99 优先级（DRI 案例）；周一盘前恢复最小 forward 流
-4. 记忆维护：把今天的机制知识存入长期记忆
+- H4c TOM 轮动:执行器就绪,**今日 16:10 ET launchd 首跑将初始化 sleeve**($30k 名义)。下个换仓窗口 7-29(收盘 QQQ→QLD)
+- H6 AI 主题:10 标的装填,入场门=7 月底 hyperscaler capex 指引(MSFT/GOOG 财报周即将到来)
+- H8 期权:**用户否决数据投入,归档**
+- 影子仓:已全部抢救结算(13 笔归档,positions 清空)
 
-## 纪律红线（不变）
+## 进行中(2026-07-21 下午启动)
 
-- H1 家族不得复活（三方向证伪）；eval_8k_v1 冻结
-- 新假设：先登记（edge/对手盘/kill criteria）→ 历史回测（池内差分+悲观成本）→ OOS 窗口 → 才 forward
-- 一切判定预注册；in-sample 归纳必须 OOS 验证（H5 教训）
-- paper only；每轮 `date` 核对时间；commit 后 push origin main
+- 广域策略普查:3 agent(A 系统性/B 事件披露/C 盲区+排雷)→ research/survey/ → 合并评分矩阵 → top 3-5 立即回测
+- 评分标准(用户定的唯一目标):可快速验证性(免费数据≥200样本+forward频率)> 净alpha 量级 > 不踩已证伪范式 > <$1M 容量
 
-## 市场时间
+## 纪律红线(不变)
 
-- 周末（7-11/12）市场关闭 = 纯研究窗口
-- 下一交易日 7-13 周一：盘前 08:00 ET 最小 forward 流 + 影子仓 manage
-- 7-14 周二收盘：11 个影子仓 time-exit
-
-## 周末队列（2026-07-11/12）
-
-- [x] H4c 执行器 tom_sleeve.py（日历已验证：7-29 收盘 QQQ→QLD，8-04 收盘回）——周一收盘轮初始化 sleeve 并纳入日常流程
-- [ ] EOD reversal 回测（30min bar，60 天窗口）——下一轮
-- [ ] FOMC 漂移（需准确 2020-26 FOMC 日历，agent 查证后回测）
-- [ ] H6：7 月底 Q2 财报季监控清单（MSFT/GOOG/AMZN/META capex 指引日期）
-- [x] report.py shadow 平仓统计修复
-- [ ] fetch_filing_text EX-99 优先级修复（低优先）
-- 周一 08:00 ET 起：最小 forward 流恢复 + 影子仓 manage；周二收盘 11 个影子仓退出
+- 已证伪不复活:LLM读文本抢定价/小中盘高换手/日内bar级/行业轮动动量
+- 新假设:预注册→历史回测(池内差分+悲观成本)→OOS→forward
+- paper only;每轮 date 核对;commit 后 push

@@ -66,11 +66,19 @@ def main():
     now = datetime.now(ET)
     today = now.strftime("%Y-%m-%d")
     tgt = target_position(today)
-    qqq = fresh_price("QQQ", max_age_min=120)["price"]
-    try:
-        qld = fresh_price("QLD", max_age_min=120)["price"]
-    except Exception:  # noqa: BLE001
-        qld = float(daily_history("QLD", period="5d")["Close"].iloc[-1])
+
+    def px(sym):
+        """收盘轮取价：fresh_price 优先，stale 则退回当日日线收盘（收盘后执行对时刻不敏感）。"""
+        try:
+            return fresh_price(sym, max_age_min=120)["price"]
+        except Exception:  # noqa: BLE001
+            d = daily_history(sym, period="5d")
+            if d.index[-1].strftime("%Y-%m-%d") != today:
+                raise RuntimeError(f"{sym}: no bar for {today} (market closed?)")
+            return float(d["Close"].iloc[-1])
+
+    qqq = px("QQQ")
+    qld = px("QLD")
     st = load_state()
     if st is None:
         # 初始化：按当日目标建仓

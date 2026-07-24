@@ -5,3 +5,4 @@ data/filings/
 *.pyc
 .DS_Store
 .venv311/
+logs/
