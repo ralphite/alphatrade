@@ -80,7 +80,7 @@ def main(start, hold_td=20):
             except Exception:  # noqa: BLE001
                 continue
             rows.append({"ticker": t, "sig": str(ev.signal_date)[:10],
-                         "n_ins": int(ev.n_insiders), "ceo_cfo": bool(ev.has_ceo_cfo),
+                         "n_ins": int(ev.n_insiders), "ceo_cfo": bool(ev.has_ceo_or_cfo),
                          "value": float(ev.total_value_usd), "adv": adv,
                          "ex_spy": (ret - spy_r) * 1e4, "ex_iwm": (ret - iwm_r) * 1e4})
         except Exception:  # noqa: BLE001

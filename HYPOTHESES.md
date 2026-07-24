@@ -158,3 +158,7 @@ guidance/tone → T+2 入场 20td 漂移：long 信号池内差分 -87bps (t=-0.
 ## C4(OpEx 日历族)判定:微弱不立项(2026-07-24 晚)
 
 三子假设:仅 OpEx 当日为负存活(SPY -21bps t=-2.3 全期),0DTE 时代衰减(t=-0.7,n=29);week/post-week 无信号。年化贡献 <1% → 与 FOMC pre-drift 同归"日历增强层"(股票 sleeve 的零成本叠加项),不占管线。
+
+## H10(insider cluster buying)判定:KILLED(2026-07-24 晚,关卡 1)
+
+近三年(2023-01 起)n=1055,悲观成本:20td vs IWM -94bps(t=-2.28);60td -244bps(t=-3.07)。分层方向与文献一致(≥3人/含CEO_CFO 较好)但最强层也仅为零;持有越久越差。机制推断:insider 数据全民可得后跟随拥挤+接飞刀。**普查 9.0 分头号候选被数据处决——评分是排队顺序,不是判决。**数据资产保留(data/insider_clusters.csv, 7909 事件)。
