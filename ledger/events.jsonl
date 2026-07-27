@@ -139,3 +139,5 @@
 {"ts": "2026-07-24T20:01:06+00:00", "et_date": "2026-07-24", "kind": "tom_sleeve_mark", "value": 30010.46, "bench": 30016.67}
 {"ts": "2026-07-24T20:10:22+00:00", "et_date": "2026-07-24", "kind": "tom_sleeve_mark", "value": 30010.46, "bench": 30016.67}
 {"ts": "2026-07-24T21:39:00+00:00", "et_date": "2026-07-24", "kind": "svxy_buy", "position": "SVXY", "shares": 175, "entry_px": 56.8284, "cash": 55.03, "entry_date": "2026-07-24", "vix": 18.579999923706055, "v3m": 20.510000228881836}
+{"ts": "2026-07-27T20:10:08+00:00", "et_date": "2026-07-27", "kind": "tom_sleeve_mark", "value": 29917.58, "bench": 29921.91}
+{"ts": "2026-07-27T20:10:09+00:00", "et_date": "2026-07-27", "kind": "ief_sleeve_buy", "position": "IEF", "shares": 214, "entry_px": 93.2787, "cash": 38.37, "entry_date": "2026-07-27"}
