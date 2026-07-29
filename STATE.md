@@ -1,7 +1,16 @@
 # STATE — 每轮唤醒先读这里
 
-更新时间:2026-07-24 21:10 ET(周五晚)
+更新时间:2026-07-29 21:10 ET(周三晚,云端例行)
 当前阶段:**三 sleeve 组合运行中(launchd 无人值守)+ 研究队列继续**
+
+## ⚠️ 2026-07-29 云端例行:数据网络被封锁,kill 核查与研究均未执行
+
+本次云端 session 的出站网络策略(egress policy)拒绝了全部行情数据主机:
+`query1/query2.finance.yahoo.com`(yfinance 底层)、`stooq.com`、`data.sec.gov`/`www.sec.gov`、
+`alphavantage.co`、`api.twelvedata.com`、`fred.stlouisfed.org` 全部返回代理层 403(策略拒绝,非临时故障,已按规程不重试/不绕过)。
+WebFetch 工具直连 Yahoo chart API 同样 403。
+**后果**:H9/H12/H4c 的 kill 条件核查(第 2 步)、研究队列推进(第 3 步)本次均无法执行——不是"没触发",而是"没能核查"。三 sleeve 持仓与本地执行层健康检查(读 git log / ledger,均为本地文件,不需要网络)仍正常完成,见下方日报。
+**需要人工处理**:若要让云端例行继续覆盖第 2/3 步,需要在环境的出站策略里放行至少一个行情数据源(stooq.com 最轻量);否则这两步只能继续由本地 launchd 执行层(有网络)承担,云端例行退化为"仅健康检查+持仓播报"。
 
 ## 组合(paper $100k)
 
