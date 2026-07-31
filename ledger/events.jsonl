@@ -144,3 +144,5 @@
 {"ts": "2026-07-28T20:10:08+00:00", "et_date": "2026-07-28", "kind": "tom_sleeve_mark", "value": 29635.5, "bench": 29634.12}
 {"ts": "2026-07-29T20:10:08+00:00", "et_date": "2026-07-29", "kind": "tom_sleeve_mark", "value": 29039.09, "bench": 29025.65}
 {"ts": "2026-07-30T20:10:07+00:00", "et_date": "2026-07-30", "kind": "tom_sleeve_mark", "value": 29983.8, "bench": 29989.47}
+{"ts": "2026-07-31T20:10:08+00:00", "et_date": "2026-07-31", "kind": "tom_sleeve_mark", "value": 30173.43, "bench": 30182.94}
+{"ts": "2026-07-31T20:10:09+00:00", "et_date": "2026-07-31", "kind": "ief_sleeve_sell", "entry_date": "2026-07-27", "exit_date": "2026-07-31", "entry_px": 93.2787, "exit_px": 92.9364, "ret_bps": -36.7, "sleeve_value": 19926.76}
