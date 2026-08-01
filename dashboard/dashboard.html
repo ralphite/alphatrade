@@ -53,8 +53,8 @@ a{color:var(--accent);}
 <div class="wrap">
   <div class="statusbar">
     <h1>alphatrade 实验仪表盘</h1>
-    <span class="phase">首周实盘闭环:H9 首笔已实现 · H12 在场 · H6 门判定中</span>
-    <span class="ts">更新 2026-08-01 03:10 ET</span>
+    <span class="phase">H6 门 PASS(减半上线)· 四 sleeve 就位 · 周一自动建仓</span>
+    <span class="ts">更新 2026-08-01 03:40 ET</span>
   </div>
 
   <div class="panel">
@@ -76,7 +76,7 @@ a{color:var(--accent);}
       <tr><th>策略</th><th>状态</th><th>现状</th></tr>
       <tr><td class="hname">H9 · IEF 月末窗口</td><td><span class="pill pass">FORWARD</span></td><td class="hsub">首笔闭环:7-27 买 93.28 → 7-31 卖 92.94(<span class="num">-36.7bps</span>,FOMC 周利率波动,单样本)。下一窗口 8 月末</td></tr>
       <tr><td class="hname">H12 · VIX carry</td><td><span class="pill pass">FORWARD</span></td><td class="hsub">三段全正+极端日审计通过。7-24 入场 SVXY@56.83,<b>在场 +2.2%</b>,contango 持续</td></tr>
-      <tr><td class="hname">H6 · AI 基建主题</td><td><span class="pill run">门判定中</span></td><td class="hsub">MSFT/GOOG 财报已出,agent 正按预注册条件(≥2 家下调 capex → 不入场)收集判定,$25k 待命</td></tr>
+      <tr><td class="hname">H6 · AI 基建主题</td><td><span class="pill pass">门 PASS·减半</span></td><td class="hsub"><b>5/5 发布 0 下调</b>(GOOG/AMZN/ORCL 上调,合计 ~$732B capex)→ 预注册门通过。场外警讯:CRWV CDS 855bp → <b>仲裁减半上线 $12.5k</b>(十标的,周一收盘 launchd 自动建仓),8-14 Q2 13F 复核加满/退出</td></tr>
       <tr><td class="hname">H4c · TOM</td><td><span class="pill run">暂停·影子</span></td><td class="hsub">恒 QQQ+窗口影子;7-29 影子窗口已由 launchd 自动记录</td></tr>
       <tr><td class="hname">已处决(11)</td><td><span class="pill dead">档案</span></td><td class="hsub">H1×3/H2/H5/H7/H4a/H4b/H10 insider(普查9.0头名,n=2110 显著为负)/H11 CEF/C3/C4——全部判定预注册、含成本、三段分解,见 HYPOTHESES.md</td></tr>
     </table>
@@ -87,6 +87,7 @@ a{color:var(--accent);}
   <div class="panel">
     <h2>更新日志</h2>
     <ul class="log">
+      <li><span class="t">08-01 03:40</span><span><b>H6 门 PASS</b>(0/5 下调,capex ~$732B 超预期)+ 减半仲裁($12.5k,CRWV CDS 警讯留痕);执行器就位,周一自动建仓</span></li>
       <li><span class="t">08-01 03:10</span><span><b>首周执行战报</b>:launchd 5/5 · H9 首笔闭环(-36.7bps)· SVXY +2.2% · 云端 routine 上线但网络受限(定位哨兵)· git 双写冲突修复 · STATUS.md 自动兜底与仪表盘源入 repo · H6 门判定中</span></li>
       <li><span class="t">07-24</span><span>重启日:launchd 上线 · 30 候选普查 · 前五当日测毕(insider 9.0 头名被杀,H9/H12 立项)· 三段分解强制化</span></li>
       <li><span class="t">07-11~21</span><span>十日中断(根因已消除:in-session loop → launchd)</span></li>
