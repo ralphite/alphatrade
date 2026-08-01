@@ -49,5 +49,22 @@ def main():
     print(f"\n[saved {out}]")
 
 
+def write_status():
+    """每日自动状态页(STATUS.md)——仪表盘断档时的权威兜底。daily_close 调用。"""
+    import json as _j
+    lines = ["# STATUS(每日自动生成)", "",
+             f"更新: {datetime.now(ZoneInfo('America/New_York')).isoformat(timespec='minutes')} ET", ""]
+    for name, f in [("TOM", "tom_sleeve.json"), ("IEF", "ief_sleeve.json"), ("SVXY", "svxy_sleeve.json")]:
+        p = ROOT / "ledger" / f
+        if p.exists():
+            lines.append(f"- **{name}**: `{_j.loads(p.read_text())}`")
+    for name, f in [("IEF trades", "ief_sleeve_trades.jsonl"), ("SVXY trades", "svxy_sleeve_trades.jsonl")]:
+        p = ROOT / "ledger" / f
+        if p.exists() and p.read_text().strip():
+            lines.append(f"- **{name}**: {len(p.read_text().splitlines())} 笔,最新 `{p.read_text().splitlines()[-1]}`")
+    (ROOT / "STATUS.md").write_text("\n".join(lines) + "\n")
+
+
 if __name__ == "__main__":
     main()
+    write_status()

@@ -43,7 +43,7 @@ def main():
             sh("git add -A")
             day = now.strftime("%Y-%m-%d")
             sh(f'git -c user.name=alphatrade-agent -c user.email=ralph.wen@gmail.com commit -q -m "daily close {day} (auto)"')
-            log.append("--- GIT ---\n" + sh("git push -q origin main 2>&1 || echo push-failed"))
+            log.append("--- GIT ---\n" + sh("git -c pull.rebase=true pull -q origin main 2>&1; git push -q origin main 2>&1 || echo push-failed"))
         except Exception:  # noqa: BLE001
             log.append("--- GIT FAILED ---\n" + traceback.format_exc())
     logdir = ROOT / "logs"
