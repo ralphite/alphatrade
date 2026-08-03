@@ -1,0 +1,49 @@
+{
+ "inception": "2026-08-03",
+ "inception_value": 12500.0,
+ "half_sized": true,
+ "review": "2026-08-14 Q2 13F -> full or exit",
+ "cash": 1830.88,
+ "holdings": {
+  "POWL": {
+   "shares": 6,
+   "entry_px": 220.1297
+  },
+  "AMKR": {
+   "shares": 29,
+   "entry_px": 50.9163
+  },
+  "VST": {
+   "shares": 8,
+   "entry_px": 156.1539
+  },
+  "TLN": {
+   "shares": 3,
+   "entry_px": 345.1269
+  },
+  "PWR": {
+   "shares": 1,
+   "entry_px": 681.2503
+  },
+  "MOD": {
+   "shares": 6,
+   "entry_px": 196.2039
+  },
+  "NVT": {
+   "shares": 7,
+   "entry_px": 159.7993
+  },
+  "ETN": {
+   "shares": 2,
+   "entry_px": 438.9374
+  },
+  "CEG": {
+   "shares": 3,
+   "entry_px": 274.1005
+  },
+  "ITRI": {
+   "shares": 9,
+   "entry_px": 101.1014
+  }
+ }
+}
