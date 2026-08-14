@@ -166,3 +166,5 @@
 {"ts": "2026-08-12T20:10:13+00:00", "et_date": "2026-08-12", "kind": "vixy_shadow", "date": "2026-08-12", "in_pos": false, "vix_prev": 15.28, "v3m_prev": 20.54, "vixy_ret_bps": -285.0, "sleeve_ret_bps": 0.0, "qqq_ret_bps": 73.1, "value": 5000.0}
 {"ts": "2026-08-13T20:10:07+00:00", "et_date": "2026-08-13", "kind": "tom_sleeve_mark", "value": 32067.58, "bench": 32115.41}
 {"ts": "2026-08-13T20:10:11+00:00", "et_date": "2026-08-13", "kind": "vixy_shadow", "date": "2026-08-13", "in_pos": false, "vix_prev": 14.55, "v3m_prev": 20.54, "vixy_ret_bps": 53.3, "sleeve_ret_bps": 0.0, "qqq_ret_bps": 115.7, "value": 5000.0}
+{"ts": "2026-08-14T20:10:07+00:00", "et_date": "2026-08-14", "kind": "tom_sleeve_mark", "value": 32024.15, "bench": 32071.1}
+{"ts": "2026-08-14T20:10:12+00:00", "et_date": "2026-08-14", "kind": "vixy_shadow", "date": "2026-08-14", "in_pos": false, "vix_prev": 14.63, "v3m_prev": 20.54, "vixy_ret_bps": -137.9, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -13.7, "value": 5000.0}
