@@ -174,3 +174,5 @@
 {"ts": "2026-08-20T20:10:07+00:00", "et_date": "2026-08-20", "kind": "tom_sleeve_mark", "value": 31159.85, "bench": 31189.31}
 {"ts": "2026-08-21T20:10:07+00:00", "et_date": "2026-08-21", "kind": "tom_sleeve_mark", "value": 31265.63, "bench": 31297.23}
 {"ts": "2026-08-24T20:10:08+00:00", "et_date": "2026-08-24", "kind": "tom_sleeve_mark", "value": 30957.32, "bench": 30982.68}
+{"ts": "2026-08-25T20:10:07+00:00", "et_date": "2026-08-25", "kind": "tom_sleeve_mark", "value": 31146.52, "bench": 31175.71}
+{"ts": "2026-08-25T20:10:08+00:00", "et_date": "2026-08-25", "kind": "ief_sleeve_buy", "position": "IEF", "shares": 213, "entry_px": 93.5337, "cash": 4.08, "entry_date": "2026-08-25"}

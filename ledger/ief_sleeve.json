@@ -1,5 +1,7 @@
 {
- "position": "CASH",
- "cash": 19926.76,
- "shares": 0
+ "position": "IEF",
+ "shares": 213,
+ "entry_px": 93.5337,
+ "cash": 4.08,
+ "entry_date": "2026-08-25"
 }
