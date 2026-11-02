@@ -259,3 +259,5 @@
 {"ts": "2026-10-30T20:10:07+00:00", "et_date": "2026-10-30", "kind": "tom_sleeve_mark", "value": 30283.08, "bench": 30294.8}
 {"ts": "2026-10-30T20:10:08+00:00", "et_date": "2026-10-30", "kind": "ief_sleeve_sell", "entry_date": "2026-10-26", "exit_date": "2026-10-30", "entry_px": 91.1282, "exit_px": 91.7317, "ret_bps": 66.2, "sleeve_value": 19790.86}
 {"ts": "2026-10-30T20:10:12+00:00", "et_date": "2026-10-30", "kind": "vixy_shadow", "date": "2026-10-30", "in_pos": false, "vix_prev": 17.2, "v3m_prev": 19.37, "vixy_ret_bps": 1042.6, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -347.4, "value": 5000.0}
+{"ts": "2026-11-02T21:10:07+00:00", "et_date": "2026-11-02", "kind": "tom_sleeve_mark", "value": 29877.59, "bench": 29881.11}
+{"ts": "2026-11-02T21:10:12+00:00", "et_date": "2026-11-02", "kind": "vixy_shadow", "date": "2026-11-02", "in_pos": false, "vix_prev": 19.42, "v3m_prev": 20.78, "vixy_ret_bps": 21.7, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -136.1, "value": 5000.0}
