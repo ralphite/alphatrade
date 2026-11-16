@@ -281,3 +281,6 @@
 {"ts": "2026-11-12T21:10:12+00:00", "et_date": "2026-11-12", "kind": "vixy_shadow", "date": "2026-11-12", "in_pos": false, "vix_prev": 17.49, "v3m_prev": 19.24, "vixy_ret_bps": 348.5, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -32.0, "value": 4284.19}
 {"ts": "2026-11-13T21:10:07+00:00", "et_date": "2026-11-13", "kind": "tom_sleeve_mark", "value": 29824.7, "bench": 29827.15}
 {"ts": "2026-11-13T21:10:12+00:00", "et_date": "2026-11-13", "kind": "vixy_shadow", "date": "2026-11-13", "in_pos": false, "vix_prev": 18.7, "v3m_prev": 20.06, "vixy_ret_bps": 234.2, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -120.3, "value": 4284.19}
+{"ts": "2026-11-16T21:10:07+00:00", "et_date": "2026-11-16", "kind": "tom_sleeve_mark", "value": 29048.55, "bench": 29035.3}
+{"ts": "2026-11-16T21:10:09+00:00", "et_date": "2026-11-16", "kind": "svxy_sell", "entry_date": "2026-11-09", "exit_date": "2026-11-16", "entry_px": 58.4392, "exit_px": 56.057, "ret_bps": -407.6, "sleeve_value": 9155.72, "vix": 23.530000686645508, "v3m": 23.420000076293945}
+{"ts": "2026-11-16T21:10:12+00:00", "et_date": "2026-11-16", "kind": "vixy_shadow", "date": "2026-11-16", "in_pos": false, "vix_prev": 19.3, "v3m_prev": 20.62, "vixy_ret_bps": 903.0, "sleeve_ret_bps": 0.0, "qqq_ret_bps": -266.8, "value": 4284.19}
