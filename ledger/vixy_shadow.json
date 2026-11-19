@@ -1,10 +1,10 @@
 {
  "inception": "2026-08-03",
  "notional": 5000.0,
- "value": 4161.64,
+ "value": 4655.32,
  "in_pos": true,
  "review": "2026-11-03",
- "days": 53,
- "days_in": 3,
- "last_date": "2026-11-18"
+ "days": 54,
+ "days_in": 4,
+ "last_date": "2026-11-19"
 }
