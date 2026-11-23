@@ -290,3 +290,6 @@
 {"ts": "2026-11-19T21:10:11+00:00", "et_date": "2026-11-19", "kind": "vixy_shadow", "date": "2026-11-19", "in_pos": true, "vix_prev": 24.56, "v3m_prev": 24.29, "vixy_ret_bps": 1186.3, "sleeve_ret_bps": 1186.3, "qqq_ret_bps": -219.4, "value": 4655.32}
 {"ts": "2026-11-20T21:10:07+00:00", "et_date": "2026-11-20", "kind": "tom_sleeve_mark", "value": 26820.83, "bench": 26762.51}
 {"ts": "2026-11-20T21:10:12+00:00", "et_date": "2026-11-20", "kind": "vixy_shadow", "date": "2026-11-20", "in_pos": true, "vix_prev": 28.44, "v3m_prev": 27.03, "vixy_ret_bps": 1429.2, "sleeve_ret_bps": 1429.2, "qqq_ret_bps": -567.3, "value": 5320.66}
+{"ts": "2026-11-23T21:10:07+00:00", "et_date": "2026-11-23", "kind": "tom_sleeve_mark", "value": 28576.41, "bench": 28553.61}
+{"ts": "2026-11-23T21:10:08+00:00", "et_date": "2026-11-23", "kind": "ief_sleeve_buy", "position": "IEF", "shares": 215, "entry_px": 91.6483, "cash": 86.47, "entry_date": "2026-11-23"}
+{"ts": "2026-11-23T21:10:11+00:00", "et_date": "2026-11-23", "kind": "vixy_shadow", "date": "2026-11-23", "in_pos": true, "vix_prev": 35.89, "v3m_prev": 30.94, "vixy_ret_bps": -1364.2, "sleeve_ret_bps": -1364.2, "qqq_ret_bps": 699.8, "value": 4594.84}
