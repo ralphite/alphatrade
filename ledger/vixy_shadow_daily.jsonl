@@ -54,3 +54,4 @@
 {"date": "2026-11-19", "in_pos": true, "vix_prev": 24.56, "v3m_prev": 24.29, "vixy_ret_bps": 1186.3, "sleeve_ret_bps": 1186.3, "qqq_ret_bps": -219.4, "value": 4655.32}
 {"date": "2026-11-20", "in_pos": true, "vix_prev": 28.44, "v3m_prev": 27.03, "vixy_ret_bps": 1429.2, "sleeve_ret_bps": 1429.2, "qqq_ret_bps": -567.3, "value": 5320.66}
 {"date": "2026-11-23", "in_pos": true, "vix_prev": 35.89, "v3m_prev": 30.94, "vixy_ret_bps": -1364.2, "sleeve_ret_bps": -1364.2, "qqq_ret_bps": 699.8, "value": 4594.84}
+{"date": "2026-11-24", "in_pos": true, "vix_prev": 26.62, "v3m_prev": 25.5, "vixy_ret_bps": -84.1, "sleeve_ret_bps": -84.1, "qqq_ret_bps": -198.6, "value": 4556.18}
