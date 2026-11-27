@@ -1,5 +1,7 @@
 {
- "position": "CASH",
- "cash": 9155.72,
- "shares": 0
+ "position": "SVXY",
+ "shares": 175,
+ "entry_px": 52.2761,
+ "cash": 7.4,
+ "entry_date": "2026-11-27"
 }

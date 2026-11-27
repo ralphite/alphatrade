@@ -297,3 +297,6 @@
 {"ts": "2026-11-24T21:10:12+00:00", "et_date": "2026-11-24", "kind": "vixy_shadow", "date": "2026-11-24", "in_pos": true, "vix_prev": 26.62, "v3m_prev": 25.5, "vixy_ret_bps": -84.1, "sleeve_ret_bps": -84.1, "qqq_ret_bps": -198.6, "value": 4556.18}
 {"ts": "2026-11-25T21:10:07+00:00", "et_date": "2026-11-25", "kind": "tom_sleeve_mark", "value": 27842.83, "bench": 27805.19}
 {"ts": "2026-11-25T21:10:11+00:00", "et_date": "2026-11-25", "kind": "vixy_shadow", "date": "2026-11-25", "in_pos": true, "vix_prev": 26.36, "v3m_prev": 25.47, "vixy_ret_bps": 462.1, "sleeve_ret_bps": 462.1, "qqq_ret_bps": -65.3, "value": 4766.72}
+{"ts": "2026-11-27T21:10:07+00:00", "et_date": "2026-11-27", "kind": "tom_sleeve_mark", "value": 28581.57, "bench": 28558.87}
+{"ts": "2026-11-27T21:10:09+00:00", "et_date": "2026-11-27", "kind": "svxy_buy", "position": "SVXY", "shares": 175, "entry_px": 52.2761, "cash": 7.4, "entry_date": "2026-11-27", "vix": 23.809999465942383, "v3m": 23.81999969482422}
+{"ts": "2026-11-27T21:10:13+00:00", "et_date": "2026-11-27", "kind": "vixy_shadow", "date": "2026-11-27", "in_pos": true, "vix_prev": 26.8, "v3m_prev": 26.29, "vixy_ret_bps": -777.5, "sleeve_ret_bps": -777.5, "qqq_ret_bps": 269.1, "value": 4396.11}
